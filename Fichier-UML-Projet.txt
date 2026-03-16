@@ -1,1 +1,0 @@
-Dans le dossier UML, il regroupera tous les diagrammes de cas d'utilisation
