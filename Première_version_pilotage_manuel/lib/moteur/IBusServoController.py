@@ -25,7 +25,8 @@ class IBusServoController:
 
         self.frame = bytearray(self.FRAME_LENGTH)
         self.channels = [1500] * self.CHANNEL_COUNT
-
+        self.index = 0
+        self.last_frame_time = 0
         # =========================
         # Création des dispositifs
         # =========================
