@@ -18,7 +18,7 @@ state = radio.begin(
     blocking=True
 )
 if state != 0:
-    print("⚠️ Erreur init radio, code:", state)
+    print("Erreur init radio, code:", state)
 
 print("Paramètres LoRaWAN OTAA")
 
