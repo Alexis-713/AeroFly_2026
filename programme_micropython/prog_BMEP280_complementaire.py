@@ -5,7 +5,7 @@ import bme280
 import time
 
 # --- Configuration --- #
-i2c = I2C(0, scl=Pin(44), sda=Pin(43), freq=10000)
+i2c = I2C(0, scl=Pin(48), sda=Pin(47), freq=10000)
 time.sleep(0.5)
 
 # Pression standard au niveau de la mer en hPa (ajustable selon la météo locale)
