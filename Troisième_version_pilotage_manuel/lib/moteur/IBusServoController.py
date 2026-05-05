@@ -105,7 +105,11 @@ class IBusServoController:
 
         for i, (device, channel) in enumerate(self.devices):
 
-            pulse = channels[channel]
+            pulse = pulse = self.assist.apply_limit(
+                channels[channel],
+                device.centre,
+                channels
+            )
 
             # CUT OFF THROTTLE
             if channel == self.CH_THROTTLE and pulse < 1100:
