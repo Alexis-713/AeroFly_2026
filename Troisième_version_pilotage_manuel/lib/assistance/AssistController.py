@@ -72,6 +72,20 @@ class AssistController:
         # Retour en valeur PWM
         return centre + x * 500
 
+    def apply_limit(self, pulse, centre, channels):
+        """
+        Point unique de limitation (utilisé partout)
+        """
+
+        limit = self.get_dynamic_limit(channels)
+
+        # expo + limitation
+        x = (pulse - centre) / 500
+        x = x**3 * self.EXPO + x * (1 - self.EXPO)
+        x *= limit
+
+        return centre + x * 500
+
     # =========================
     # ASSIST
     # =========================
@@ -83,7 +97,7 @@ class AssistController:
         - génère les sorties finales (PWM)
         """
 
-        # Détection activation (juste pour log)
+        # Détection activation
         if not self.assist_active:
             print("ASSIST ON")
             self.assist_active = True
@@ -121,8 +135,8 @@ class AssistController:
 
             # Limitation des débattements (sauf throttle)
             if channel != self.CH_THROTTLE:
-                if use_radio and channels[self.ASSIST_CHANNEL] < self.ASSIST_THRESHOLD:
-                    pulse = self.limit_servo_travel(pulse, device.centre, limit)
+                if use_radio:
+                    pulse = self.apply_limit(pulse, device.centre, channels)
 
             # Sécurité : coupe le throttle si trop bas
             if channel == self.CH_THROTTLE and pulse < 1100:
