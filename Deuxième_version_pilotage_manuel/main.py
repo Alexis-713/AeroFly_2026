@@ -1,5 +1,5 @@
 from lib.configuration.reduire_conso_energie import reduire_conso_energie
-from lib.moteur.IBusServoController import IBusServoController
+from lib.moteur.MainController import MainController
 from lib.configuration.configuration import configuration
 reduire_conso_energie()
 from machine import Pin
@@ -14,5 +14,5 @@ while i < 5:
     time.sleep(1)
 time.sleep(5)
 print("Lancement")
-controller = IBusServoController(configuration)
+controller = MainController(configuration)
 controller.run()
