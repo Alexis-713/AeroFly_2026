@@ -1,0 +1,33 @@
+AT+ID=DEVEUI   --> DevEui, 2C:F7:F1:20:64:10:3A:44
+AT+ID=APPEUI   --> AppEui, 52:69:73:69:6E:67:48:46
+APPKEY:ID+KEY=APPKEY, "50062DE64E3A5C0DBCB6D5192834C677"
+AT+MODE=LWOTAA
+AT+JOIN
+AT+MSG=HELLO
+
+
+Carte MR SEDDAK:
+AT+ID=DEVEUI   --> DevEui, 2C:F7:F1:20:64:10:40:09
+AT+ID=APPEUI   --> AppEui, 52:69:73:69:6E:67:48:46
+APPKEY:ID+KEY=APPKEY,"333D6E1042EAE4AF0E1EEC2EF2A3F401"
+AT+MODE=LWOTAA
+AT+JOIN
+AT+MSG=HELLO    SEVMTE8=
+
+|   Commande  | Base64 attendu |
+|-------------|----------------|
+| AT+MSG=HELLO| SEVMTE8=       |
+| AT+MSG=21   | MjE=           |
+| AT+MSG=ABC  | QUJD           |
+
+
+AT+MSG="GPS:47.217676;-0.72734136,bat:11.73,temp:65.0,hum:2.2,pres:554.8,vit:229.3"
+
+AT+MSGHEX="48454C4C4F"
+
+
+Vérifications de données:
+Applications/aerotrack/End devices/wi-e5-prof/Live data
+
+e-mail ttn: aerotrackhyrome@gmail.com
+mot de passe: hyrome49#
