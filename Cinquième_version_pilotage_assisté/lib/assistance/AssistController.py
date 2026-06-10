@@ -12,7 +12,7 @@ class AssistController:
         self.MAX_RATE = 1.0
         
         
-        self.IMU_GAIN_DEBUTANT = 1.6
+        self.IMU_GAIN_DEBUTANT = 1.7
         self.IMU_GAIN_INTERMEDIAIRE = 1.3
         self.IMU_GAIN_EXPERT = 1.0
 
@@ -22,7 +22,7 @@ class AssistController:
         self.EXPO = 0.3
         
         # Deadzone
-        self.PILOT_OVERRIDE = 150
+        self.PILOT_OVERRIDE = 200
         
         self.assist_active = False  # état interne
         

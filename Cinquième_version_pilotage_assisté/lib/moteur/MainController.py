@@ -170,7 +170,7 @@ class MainController:
             if is_failsafe:
             
                 self.stabilizer.target_pitch -= 0.1
-                self.stabilizer.target_pitch = max(-6, self.stabilizer.target_pitch)
+                self.stabilizer.target_pitch = max(-8, self.stabilizer.target_pitch)
                 
                 outputs = self.assist.compute(
                     channels,
