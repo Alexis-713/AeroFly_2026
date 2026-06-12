@@ -151,3 +151,39 @@ class PitotSensor:
     def __repr__(self):
         return (f"PitotSensor(address=0x{self.address:02X}, "
                 f"offset={self._offset:.2f} Pa)")
+    
+# =====================================================================
+# Bloc d'exécution autonome (permet de lancer le script directement)
+# =====================================================================
+if __name__ == "__main__":
+    print("Démarrage du test autonome du tube de Pitot...")
+
+    # Instanciation du capteur avec les broches par défaut (SDA=43, SCL=44)
+    # On active le mode debug pour voir si l'I2C s'initialise correctement
+    capteur_pitot = PitotSensor(sda_pin=5, scl_pin=4, debug=True)
+
+    # Étape essentielle pour un tube de Pitot : l'auto-zéro au repos
+    # Assure-toi que le tube n'est pas face au vent/souffle pendant cette phase !
+    capteur_pitot.calibrate(nb_readings=40, delay_ms=30)
+
+    print("Début du suivi de la vitesse (Ctrl+C pour arrêter)...")
+    try:
+        while True:
+            # Lecture des données calculées
+            donnees = capteur_pitot.read()
+
+            if donnees is not None:
+                print("-" * 40)
+                print(f"Pression Corrigée : {donnees['pressure_pa']:.2f} Pa")
+                print(f"Vitesse           : {donnees['speed_ms']:.2f} m/s")
+                print(f"Vitesse           : {donnees['speed_kmh']:.2f} km/h")
+                print(f"Température       : {donnees['temperature_c']:.1f} °C")
+            else:
+                print("[Erreur] Impossible de récupérer les données du capteur.")
+
+            # Pause de 200ms entre deux affichages (5 Hz)
+            time.sleep(0.2)
+
+    except KeyboardInterrupt:
+        print("\nArrêt du programme par l'utilisateur.")
+
